@@ -44,16 +44,8 @@
     <div class="sidebar">
         <h4 class="text-white text-center mt-3">Menu</h4>
 
-        <a href="{{ route('dashboard') }}">
-            <i class="bi bi-wallet2 me-2"></i> Dashboard
-        </a>
-
-        <a href="{{ route('deposito.create') }}">
-            <i class="bi bi-arrow-down-circle me-2"></i> Depósito
-        </a>
-
-        <a href="{{ route('transferencia.create') }}">
-            <i class="bi bi-send me-2"></i> Transferir
+        <a href="{{ route('home') }}">
+            <i class="bi bi-wallet2 me-2"></i> home
         </a>
 
         <form action="{{ route('logout') }}" method="POST" class="d-block">
@@ -67,18 +59,18 @@
 
     <!-- Conteúdo principal -->
     <div class="main">
-        @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
-        </div>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         @endif
 
-        @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
-        </div>
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         @endif
         @yield('content')
     </div>
