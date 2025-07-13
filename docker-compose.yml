@@ -1,0 +1,121 @@
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel/app
+    container_name: carteira_financeira-app
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www:delegated
+      - ./docker_config_files/php/local.ini:/usr/local/etc/php/conf.d/local.ini:delegated
+      - ~/.composer/docker-cache/:/root/.composer:cached
+    networks:
+      - carteira_financeira-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: carteira_financeira-webserver
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www:delegated
+      - ./docker_config_files/nginx/conf.d/:/etc/nginx/conf.d/:delegated
+    networks:
+      - carteira_financeira-network
+    depends_on:
+      - postgres
+      - app
+
+  #Postgres Service
+  postgres:
+    container_name: carteira_financeira-postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres:delegated
+    ports:
+      - "5432:5432"
+    networks:
+      - carteira_financeira-network
+
+  #PgAdmin
+  pgadmin:
+    container_name: carteira_financeira-pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: administrador_carteira@email.com
+      PGADMIN_DEFAULT_PASSWORD: carteira
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "8080:80"
+    networks:
+      - carteira_financeira-network
+    depends_on:
+      - postgres
+
+  #Composer
+  composer:
+    build:
+      context: .
+      dockerfile: Dockerfile-composer
+    container_name: carteira_financeira-composer
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www/
+    depends_on:
+      - app
+    networks:
+      - carteira_financeira-network
+
+  #NPM
+  npm:
+    image: node:18
+    container_name: carteira_financeira-npm
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www/
+    entrypoint: [ "npm" ]
+    networks:
+      - carteira_financeira-network
+
+  #Artisan
+  artisan:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: carteira_financeira-artisan
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - postgres
+    working_dir: /var/www/
+    entrypoint: [ "php", "/var/www/artisan" ]
+    networks:
+      - carteira_financeira-network
+
+#Docker Networks
+networks:
+  carteira_financeira-network:
+    driver: bridge
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+  postgres:
+  pgadmin:
