@@ -8,11 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Uuid\Uuid;
+use App\Observers\AuditoriaObserver;
+use Dds\Traits\FastModel;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes, FastModel;
 
     protected $keyType = 'string';
 
@@ -23,6 +25,8 @@ class User extends Authenticatable
         static::creating(function ($model) {
             $model->{$model->primaryKey} = Uuid::uuid4();
         });
+
+        parent::observe(AuditoriaObserver::class);
     }
 
     /**
@@ -34,6 +38,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
+        'is_super_admin',
     ];
 
     /**
@@ -56,11 +62,43 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
+            'is_super_admin' => 'boolean',
         ];
     }
+
+    protected $searchable = [
+        'user' => ['ilike', [
+            'users.name',
+            'users.cpf'
+        ]],
+        'name' => ['ilike', 'users.name'],
+        'email' => ['ilike', 'users.email'],
+        'permission_nome' => ['ilike', 'permissions.nome'],
+        'permission_group' => ['ilike', 'permissions.group'],
+        'permission_sub_group' => ['ilike', 'permissions.sub_group'],
+        'created' => ['date', 'users.created_at'],
+        'created_from' => ['begin', 'users.created_at'],
+        'created_to' => ['end', 'users.created_at'],
+    ];
 
     public function isLogged()
     {
         return auth()->id() == $this->id;
+    }
+
+    public function isAdmin()
+    {
+        return $this->isSuperAdmin() || $this->is_admin;
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->is_super_admin;
+    }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(\App\Models\Sistema\Permission::class, 'users_permissions', 'user_id', 'permission_id');
     }
 }

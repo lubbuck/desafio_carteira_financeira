@@ -17,7 +17,8 @@ class AccountController extends Controller
     public function show()
     {
         $user = auth()->user();
-        return view($this->bag['view'] . '.show', compact('user'));
+        $permissions = $user->permissions()->orderBy('permissions.nome', 'asc')->get();
+        return view($this->bag['view'] . '.show', compact('user', 'permissions'));
     }
 
     public function edit()

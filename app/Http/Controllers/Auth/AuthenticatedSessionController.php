@@ -28,6 +28,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        session([
+            'super_admin_visualization' => auth()->user()->isSuperAdmin()
+        ]);
+
         return redirect()->intended(route('home', absolute: false));
     }
 
