@@ -2,8 +2,7 @@
     <div class="app-brand demo ">
         <a href="{{ route('home') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
-                <img src="{{ asset(config('project.layout.logo')) }}"
-                    alt="" width="150">
+                {{ config('project.layout.name') }}
             </span>
         </a>
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-autod-block d-xl-none">
