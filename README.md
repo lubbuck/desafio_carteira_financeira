@@ -15,6 +15,8 @@ Sistema de simulação de uma carteira financeira
     -   Verificação de saldo ao tranfererir valores
 -   Visualização das carteiras com informações das operações
 
+[Documento explicativo sobre o sistema](https://docs.google.com/document/d/1B_j0qzazW0F3CCtLbm4SM1B8Ph-UFHkb/edit?usp=sharing&ouid=116466061483400451914&rtpof=true&sd=true)
+
 ## Tecnologias Utilizadas:
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40" style="max-width:100%;"></img>
@@ -41,21 +43,21 @@ Como pré-requisito para a execução do projeto é necessário ter instalado na
         ```
 -   Execute os próximos comandos em sequência
 
--   `docker-compose up -d` (cria os containers no docker)
+    -   `docker-compose up -d` (cria os containers no docker)
 
--   `docker-compose run --rm composer install` (instala as dependências do backend via composer)
+    -   `docker-compose run --rm composer install` (instala as dependências do backend via composer)
 
--   `docker-compose run --rm artisan key:generate` (gera a chave do sistema)
+    -   `docker-compose run --rm artisan key:generate` (gera a chave do sistema)
 
--   `docker-compose run --rm artisan storage:link` (cria o link de armazenamento de arquivos)
+    -   `docker-compose run --rm artisan storage:link` (cria o link de armazenamento de arquivos)
 
--   `docker-compose run --rm npm install` (instala as dependências do frontend via npm)
+    -   `docker-compose run --rm npm install` (instala as dependências do frontend via npm)
 
--   `docker-compose run --rm npm run build` (compila as dependências do frontend via npm)
+    -   `docker-compose run --rm npm run build` (compila as dependências do frontend via npm)
 
--   `docker-compose run --rm artisan migrate --seed` (cria as tabelas no banco de dados com dados iniciais)
+    -   `docker-compose run --rm artisan migrate --seed` (cria as tabelas no banco de dados com dados iniciais)
 
--   Acesse o projeto em: [http://localhost/](http://localhost/)
+    -   Após os comandos acesse o projeto em: [http://localhost/](http://localhost/)
 
 ## Instalação e execução do projeto sem docker
 
@@ -73,16 +75,16 @@ Como pré-requisito para a execução do projeto é necessário ter instalado na
         ```
 -   Execute os próximos comandos em sequência
 
--   `composer install` (instala as dependências do backend via composer)
+    -   `composer install` (instala as dependências do backend via composer)
 
--   `php artisan key:generate` (gera a chave do sistema)
+    -   `php artisan key:generate` (gera a chave do sistema)
 
--   `php artisan storage:link` (cria o link de armazenamento de arquivos)
+    -   `php artisan storage:link` (cria o link de armazenamento de arquivos)
 
--   `npm install` (instala as dependências do frontend via npm)
+    -   `npm install` (instala as dependências do frontend via npm)
 
--   `npm run build` (compila as dependências do frontend via npm)
+    -   `npm run build` (compila as dependências do frontend via npm)
 
--   `php artisan migrate --seed` (cria as tabelas no banco de dados com dados iniciais)
+    -   `php artisan migrate --seed` (cria as tabelas no banco de dados com dados iniciais)
 
--   Acesse o projeto em: [http://localhost:8000/](http://localhost:8000/)
+    -   Após os comandos acesse o projeto em: [http://localhost:8000/](http://localhost:8000/)
