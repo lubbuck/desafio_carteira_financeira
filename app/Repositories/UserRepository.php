@@ -21,7 +21,7 @@ class UserRepository implements UserRepositoryInterface
         $this->model = $model;
     }
 
-    public function model()
+    public function model(): Model
     {
         return $this->model;
     }

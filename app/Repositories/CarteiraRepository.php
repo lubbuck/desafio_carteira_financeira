@@ -20,7 +20,7 @@ class CarteiraRepository implements CarteiraRepositoryInterface
         $this->model = $model;
     }
 
-    public function model()
+    public function model(): Model
     {
         return $this->model;
     }

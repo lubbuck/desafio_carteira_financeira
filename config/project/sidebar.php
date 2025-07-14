@@ -11,7 +11,7 @@ return [
         ],
         [
             "name" =>  "Carteiras",
-            "icon" => "bx bx-dollar",
+            "icon" => "bx bx-wallet",
             "route" => "carteira.index"
         ],
     ],

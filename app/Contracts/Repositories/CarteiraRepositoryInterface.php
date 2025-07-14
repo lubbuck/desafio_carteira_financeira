@@ -8,6 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CarteiraRepositoryInterface
 {
+    public function model(): Model;
     public function create(array $data): Model;
     public function find($id): ?Model;
     public function all($filters, $order, $sort): Collection;
