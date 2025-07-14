@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use App\Http\Requests\Administracao\User\{
     UserRequest,
     UpdatePasswordRequest,
@@ -15,6 +14,8 @@ use App\Http\Requests\Administracao\User\{
 };
 use App\Models\User;
 use App\Models\Sistema\Permission;
+use App\Services\UserService;
+use App\Services\CarteiraService;
 
 class UserController extends Controller
 {
@@ -22,6 +23,15 @@ class UserController extends Controller
         'view' => 'administracao.user',
         'route' => 'administracao.user',
     ];
+
+    protected $userService;
+    protected $carteiraService;
+
+    public function __construct(UserService $userService, CarteiraService $carteiraService)
+    {
+        $this->userService = $userService;
+        $this->carteiraService = $carteiraService;
+    }
 
     public function index(Request $request)
     {
@@ -36,12 +46,10 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $validated = $request->validated();
-        $validated['password'] = Hash::make(Str::random(8));
-
         try {
             DB::beginTransaction();
-            $user = User::create($validated);
+            $user = $this->userService->create($request->name, $request->email);
+            $this->carteiraService->create($user->id);
             DB::commit();
             return redirect()->route($this->bag['route'] . '.permission.edit', ['user' => $user->getKey()])->with(['success' => "Usuário cadastrado com sucesso"]);
         } catch (\Throwable $th) {
@@ -50,10 +58,11 @@ class UserController extends Controller
         }
     }
 
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
         $permissions = $user->permissions()->orderBy('permissions.nome', 'asc')->get();
-        return view($this->bag['view'] . '.show', compact('user', 'permissions'));
+        $carteiras = $user->carteiras()->index($request->all(), 'created_at', 'desc')->get();
+        return view($this->bag['view'] . '.show', compact('user', 'permissions', 'carteiras'));
     }
 
     public function edit(User $user)

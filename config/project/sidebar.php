@@ -9,6 +9,11 @@ return [
             "icon" => "bx bx-home",
             "route" => "home"
         ],
+        [
+            "name" =>  "Carteiras",
+            "icon" => "bx bx-dollar",
+            "route" => "carteira.index"
+        ],
     ],
 
     'administracao' => [

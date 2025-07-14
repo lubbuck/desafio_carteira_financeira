@@ -16,7 +16,7 @@
                 <div class="card-body p-4">
                     <div class="media ai-icon">
                         <span class="me-3 bgl-primary text-primary">
-                            <i class='fa fa-users text-primary'></i>
+                            <i class='bx bx-group text-primary'></i>
                         </span>
                         <div class="media-body">
                             <p class="mb-1">Usuários</p>

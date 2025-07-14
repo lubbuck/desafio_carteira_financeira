@@ -101,4 +101,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(\App\Models\Sistema\Permission::class, 'users_permissions', 'user_id', 'permission_id');
     }
+
+    public function carteiras()
+    {
+        return $this->hasMany(Carteira::class, 'user_id');
+    }
 }

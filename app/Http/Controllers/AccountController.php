@@ -18,7 +18,8 @@ class AccountController extends Controller
     {
         $user = auth()->user();
         $permissions = $user->permissions()->orderBy('permissions.nome', 'asc')->get();
-        return view($this->bag['view'] . '.show', compact('user', 'permissions'));
+        $carteira = $user->carteiras()->where('ativada', true)->first();
+        return view($this->bag['view'] . '.show', compact('user', 'permissions', 'carteira'));
     }
 
     public function edit()
