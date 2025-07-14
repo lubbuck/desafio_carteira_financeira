@@ -22,7 +22,6 @@
                             <th style="width: 170px">Cadastrado em</th>
                             <th>Valor R$</th>
                             <th style="width: 150px">Status</th>
-                            <th style="width: 80px"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,11 +30,6 @@
                                 <td style="width: 170px">{{ $deposito->createdAt() }} </td>
                                 <td>
                                     {{ $deposito->valor() }}
-                                </td>
-                                <td style="width: 180px">
-                                    {{ $deposito->status() }}
-                                </td>
-                                <td style="width: 80px">
                                     @if (is_null($deposito->reversao))
                                         @if ($carteira->ativada)
                                             <button
@@ -47,12 +41,14 @@
                                             <form id="{{ 'reverter-deposito-' . $deposito->id }}" method="POST"
                                                 action="{{ route('deposito_reversao.store', ['deposito' => $deposito->id]) }}">
                                                 @csrf
-                                                @method('PUT')
                                             </form>
                                         @endif
                                     @else
                                         <span class="badge bg-warning">Revertido</span>
                                     @endif
+                                </td>
+                                <td style="width: 180px">
+                                    {{ $deposito->status() }}
                                 </td>
                             </tr>
                         @endforeach
