@@ -16,8 +16,13 @@ return [
         ],
         [
             "name" =>  "Depositar",
-            "icon" => "bx bx-wallet",
+            "icon" => "bx bx-dollar",
             "route" => "deposito.create"
+        ],
+        [
+            "name" =>  "Sacar",
+            "icon" => "bx bx-dollar",
+            "route" => "saque.create"
         ]
     ],
 

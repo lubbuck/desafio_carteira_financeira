@@ -10,7 +10,8 @@ use App\Contracts\Repositories\{
     EntradaRepositoryInterface,
     SaidaRepositoryInterface,
     DepositoRepositoryInterface,
-    DepositoReversaoRepositoryInterface
+    DepositoReversaoRepositoryInterface,
+    SaqueRepositoryInterface
 };
 
 use App\Repositories\{
@@ -19,7 +20,8 @@ use App\Repositories\{
     EntradaRepository,
     SaidaRepository,
     DepositoRepository,
-    DepositoReversaoRepository
+    DepositoReversaoRepository,
+    SaqueRepository
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -32,6 +34,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SaidaRepositoryInterface::class, SaidaRepository::class);
         $this->app->bind(DepositoRepositoryInterface::class, DepositoRepository::class);
         $this->app->bind(DepositoReversaoRepositoryInterface::class, DepositoReversaoRepository::class);
+        $this->app->bind(SaqueRepositoryInterface::class, SaqueRepository::class);
     }
 
     public function boot()

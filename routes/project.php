@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     CarteiraController,
     DepositoController,
+    SaqueController,
 };
 
 use App\Http\Controllers\Administracao\{
@@ -23,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/store', [CarteiraController::class, 'store'])->name('carteira.store');
         Route::get('/show/{carteira}', [CarteiraController::class, 'show'])->name('carteira.show');
         Route::get('/show/{carteira}/depositos', [CarteiraController::class, 'depositos'])->name('carteira.depositos');
+        Route::get('/show/{carteira}/saques', [CarteiraController::class, 'saques'])->name('carteira.saques');
         Route::put('/desativar', [CarteiraController::class, 'desativar'])->name('carteira.desativar');
     });
 
@@ -30,6 +32,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/create', [DepositoController::class, 'create'])->name('deposito.create');
         Route::post('/store', [DepositoController::class, 'store'])->name('deposito.store');
         Route::put('/reverter/{deposito}', [DepositoController::class, 'reverter'])->name('deposito.reverter');
+    });
+
+    Route::group(['prefix' => 'saque'], function () {
+        Route::get('/create', [SaqueController::class, 'create'])->name('saque.create');
+        Route::post('/store', [SaqueController::class, 'store'])->name('saque.store');
     });
 });
 

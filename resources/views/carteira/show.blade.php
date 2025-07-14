@@ -15,9 +15,17 @@
         <div class="card-header border-bottom-0">
             <div class="btn-list">
                 @include('utils.buttons.link', [
+                    'route' => 'carteira.saques',
+                    'params' => ['carteira' => $carteira->id],
+                    'text' => 'Saques',
+                    'class' =>
+                        'btn btn-sm ' .
+                        (session('layout_theme') === 'light-style' ? 'btn-outline-info' : 'btn-info'),
+                ])
+                @include('utils.buttons.link', [
                     'route' => 'carteira.depositos',
                     'params' => ['carteira' => $carteira->id],
-                    'text' => 'Depositos',
+                    'text' => 'Depósitos',
                     'class' =>
                         'btn btn-sm ' .
                         (session('layout_theme') === 'light-style' ? 'btn-outline-info' : 'btn-info'),

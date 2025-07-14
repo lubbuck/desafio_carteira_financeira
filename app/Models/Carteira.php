@@ -92,4 +92,9 @@ class Carteira extends Model
     {
         return $this->hasMany(Deposito::class, 'carteira_id');
     }
+
+    public function saques()
+    {
+        return $this->hasMany(Saque::class, 'carteira_id');
+    }
 }

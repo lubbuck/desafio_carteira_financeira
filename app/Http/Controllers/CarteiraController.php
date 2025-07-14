@@ -80,6 +80,22 @@ class CarteiraController extends Controller
         return view($this->bag['view'] . '.depositos', compact('carteira', 'depositos'));
     }
 
+    public function saques($carteira)
+    {
+        $carteira = $this->carteiraService->find($carteira);
+
+        if (is_null($carteira)) {
+            abort(404);
+        }
+
+        if ($carteira->user_id != auth()->id()) {
+            return redirect()->route($this->bag['route'] . '.index')->with(['info' => "Você não possui acesso nesta carteira"]);;
+        }
+
+        $saques = $carteira->saques()->orderBy('created_at', 'desc')->get();
+        return view($this->bag['view'] . '.saques', compact('carteira', 'saques'));
+    }
+
     public function desativar()
     {
         $carteira = $this->carteiraService->carteiraAtiva(auth()->id());
