@@ -5,5 +5,5 @@
 
 @include('utils.buttons.link', [
     'title' => 'Editar Perfis e Permissões',
-    'icon' => 'bx bx-eye',
+    'icon' => 'bx bx-show',
 ])

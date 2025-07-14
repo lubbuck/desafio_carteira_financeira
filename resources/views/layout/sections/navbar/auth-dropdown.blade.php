@@ -1,3 +1,11 @@
+<li class="nav-item lh-1 me-3">
+    <a href="{{ route('toogleTheme') }}" class="btn" aria-label="Seleção de Tema"
+        title="{{ session('layout_theme') == 'light-style' ? 'Tema Dark' : 'Tema Light' }}">
+        <i
+            class="{{ session('layout_theme') == 'light-style' ? 'bx bx-moon text-primary' : 'bx bx-sun text-white' }}"></i>
+    </a>
+</li>
+
 @auth
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
         <a class="dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -24,6 +32,17 @@
                 <i class="bx bx-lock-open-alt text-danger me-2"></i>
                 <span class="align-middle">Editar Senha</span>
             </a>
+            @if (auth()->user()->isSuperAdmin())
+                <div class="dropdown-divider"></div>
+                <a href="{{ route('sistema.home') }}" class="dropdown-item">
+                    <i class="bx bx-cog text-primary"></i>
+                    <span class="ms-2">Sistema</span>
+                </a>
+                <a href="{{ route('sistema.toogle') }}" class="dropdown-item">
+                    <i class="bx bx-{{ session('super_admin_visualization') ? 'show' : 'block' }} text-primary"></i>
+                    <span class="ms-2">Super Administrador</span>
+                </a>
+            @endif
             <li>
                 <div class="dropdown-divider"></div>
             </li>

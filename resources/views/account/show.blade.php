@@ -11,7 +11,10 @@
 
 @section('content')
     <div class="card">
-        <div class="card-body">
+        <div class="card-header border-bottom-0">
+            @include('sistema.permission.user')
+        </div>
+        <div class="card-body pt-0">
             <h4 class="text-uppercase">
                 {{ $user->name }}
             </h4>

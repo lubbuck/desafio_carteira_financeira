@@ -18,10 +18,9 @@
         @endphp
         <a class="{{ $fieldInRequest ? 'text-primary' : '' }}" href="{{ $url }}">
             @if ($fieldInRequest)
-                <i
-                    class="fa fa-sort-amount{{ $atualSort == 'asc' ? '-down-alt' : ($atualSort == 'desc' ? '-down' : '') }}"></i>
+                <i class="bx bx-sort-{{ $atualSort == 'asc' ? 'down' : ($atualSort == 'desc' ? 'up' : '') }}"></i>
             @else
-                <i class="fa fa-sort"></i>
+                <i class="bx bx-sort-alt-2"></i>
             @endif
             {{ $title }}
         </a>

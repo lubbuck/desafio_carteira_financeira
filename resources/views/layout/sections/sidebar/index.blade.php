@@ -10,6 +10,9 @@
         </a>
     </div>
     <div class="menu-inner-shadow"></div>
+    @php
+        $sidebar = \Dds\Classes\OrganizaSidebar::sidebar($sidebar);
+    @endphp
     <ul class="menu-inner py-1">
         @each('layout.sections.sidebar.sidebar-item', $sidebar, 'item')
     </ul>

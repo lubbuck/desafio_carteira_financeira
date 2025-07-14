@@ -3,21 +3,18 @@
         <span class="menu-header-text">{{ $item['header'] }}</span>
     </li>
 @else
-    @php
-        $outside = $item['outside'] ?? false;
-        $submenu = $item['submenu'] ?? false;
-        $item['classActive'] = '';
-        if ($submenu) {
-            $route = 'javascript:void(0);';
-        } elseif ($outside) {
-            $route = $item['route'];
-        } else {
-            $item['classActive'] = request()->routeIs($item['route']) ? 'active' : '';
-            $route = route($item['route']);
-        }
-    @endphp
     <li class="menu-item {{ $item['classActive'] }}">
-
+        @php
+            $outside = $item['outside'] ?? false;
+            $submenu = $item['submenu'] ?? false;
+            if ($submenu) {
+                $route = 'javascript:void(0);';
+            } elseif ($outside) {
+                $route = $item['route'];
+            } else {
+                $route = route($item['route']);
+            }
+        @endphp
         <a href="{{ $route }}" class="menu-link {{ $submenu ? ' menu-toggle ' : '' }}"
             @if (isset($item['target'])) target="__blank" @endif>
             <i class="menu-icon {{ $item['icon'] ?? '' }}"></i>
