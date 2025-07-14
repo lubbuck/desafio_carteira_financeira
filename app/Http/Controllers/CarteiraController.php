@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Carteira;
 use App\Services\CarteiraService;
 
 class CarteiraController extends Controller
@@ -35,7 +34,7 @@ class CarteiraController extends Controller
         $carteira = $this->carteiraService->carteiraAtiva(auth()->id());
 
         if (!is_null($carteira)) {
-            return redirect()->route($this->bag['route'] . '.show', ['carteira' => $carteira->getKey()])->with(['info' => "Você já possui uma carteira ativa"]);;
+            return redirect()->route($this->bag['route'] . '.show', ['carteira' => $carteira->getKey()])->with(['error' => "Você já possui uma carteira ativa"]);;
         }
 
         try {
@@ -58,7 +57,7 @@ class CarteiraController extends Controller
         }
 
         if ($carteira->user_id != auth()->id()) {
-            return redirect()->back()->with(['error' => "Você não possui acesso nesta carteira"]);
+            return redirect()->route($this->bag['route'] . '.index')->with(['info' => "Você não possui acesso nesta carteira"]);;
         }
 
         return view($this->bag['view'] . '.show', compact('carteira'));
@@ -69,18 +68,18 @@ class CarteiraController extends Controller
         $carteira = $this->carteiraService->carteiraAtiva(auth()->id());
 
         if (is_null($carteira)) {
-            return redirect()->back()->with(['error' => "Você não possui uma carteira ativa"]);
+            return redirect()->route($this->bag['route'] . '.index')->with(['error' => "Você não possui uma carteira ativa"]);;
         }
 
         if ($carteira->possuiSaldo()) {
-            return redirect()->back()->with(['error' => "Você ainda possui saldo na carteira. Saque ou transfira antes de desativar"]);
+            return redirect()->route($this->bag['route'] . '.show', ['carteira' => $carteira->id])->with(['error' => "Você ainda possui saldo na carteira. Saque ou transfira antes de desativar"]);;
         }
 
         try {
             DB::beginTransaction();
             $carteira->update(['ativada' => false]);
             DB::commit();
-            return redirect()->route($this->bag['route'] . '.show', ['carteira' => $carteira->getKey()]);
+            return redirect()->route($this->bag['route'] . '.show', ['carteira' => $carteira->getKey()])->with(['success' => 'Carteira Desativada com sucesso']);
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with(['error' => $th->getMessage()]);
