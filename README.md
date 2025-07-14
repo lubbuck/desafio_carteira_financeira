@@ -57,6 +57,8 @@ Como pré-requisito para a execução do projeto é necessário ter instalado na
 
     -   `docker-compose run --rm artisan migrate --seed` (cria as tabelas no banco de dados com dados iniciais)
 
+    -   `docker exec -it carteira_financeira-app chown -R www-data:www-data /var/www/storage` (permite o acesso do docker às pastas)
+
     -   Após os comandos acesse o projeto em: [http://localhost/](http://localhost/)
 
 ## Instalação e execução do projeto sem docker
