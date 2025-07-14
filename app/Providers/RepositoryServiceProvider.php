@@ -6,12 +6,20 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Contracts\Repositories\{
     UserRepositoryInterface,
-    CarteiraRepositoryInterface
+    CarteiraRepositoryInterface,
+    EntradaRepositoryInterface,
+    SaidaRepositoryInterface,
+    DepositoRepositoryInterface,
+    DepositoReversaoRepositoryInterface
 };
 
 use App\Repositories\{
     UserRepository,
-    CarteiraRepository
+    CarteiraRepository,
+    EntradaRepository,
+    SaidaRepository,
+    DepositoRepository,
+    DepositoReversaoRepository
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -20,6 +28,10 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(CarteiraRepositoryInterface::class, CarteiraRepository::class);
+        $this->app->bind(EntradaRepositoryInterface::class, EntradaRepository::class);
+        $this->app->bind(SaidaRepositoryInterface::class, SaidaRepository::class);
+        $this->app->bind(DepositoRepositoryInterface::class, DepositoRepository::class);
+        $this->app->bind(DepositoReversaoRepositoryInterface::class, DepositoReversaoRepository::class);
     }
 
     public function boot()

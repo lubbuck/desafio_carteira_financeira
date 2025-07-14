@@ -68,7 +68,7 @@ class Carteira extends Model
         return $this->saldo > 0;
     }
 
-    public function possuiSaldoParaOperacao($valor)
+    public function possuiSaldoParaRetirar($valor)
     {
         return (int) $this->saldo >= (int) $valor;
     }
@@ -86,5 +86,10 @@ class Carteira extends Model
     public function saidas()
     {
         return $this->hasMany(Saida::class, 'carteira_id');
+    }
+
+    public function depositos()
+    {
+        return $this->hasMany(Deposito::class, 'carteira_id');
     }
 }

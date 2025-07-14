@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
-    CarteiraController
+    CarteiraController,
+    DepositoController,
 };
 
 use App\Http\Controllers\Administracao\{
@@ -16,11 +17,19 @@ Route::group([], function () {});
 
 // todas as rotas da aplicação logado FORA do middleware de permissão
 Route::group(['middleware' => ['auth']], function () {
+
     Route::group(['prefix' => 'carteira'], function () {
         Route::get('/', [CarteiraController::class, 'index'])->name('carteira.index');
         Route::post('/store', [CarteiraController::class, 'store'])->name('carteira.store');
         Route::get('/show/{carteira}', [CarteiraController::class, 'show'])->name('carteira.show');
+        Route::get('/show/{carteira}/depositos', [CarteiraController::class, 'depositos'])->name('carteira.depositos');
         Route::put('/desativar', [CarteiraController::class, 'desativar'])->name('carteira.desativar');
+    });
+
+    Route::group(['prefix' => 'deposito'], function () {
+        Route::get('/create', [DepositoController::class, 'create'])->name('deposito.create');
+        Route::post('/store', [DepositoController::class, 'store'])->name('deposito.store');
+        Route::put('/reverter/{deposito}', [DepositoController::class, 'reverter'])->name('deposito.reverter');
     });
 });
 
