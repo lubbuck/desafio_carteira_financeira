@@ -11,6 +11,7 @@ interface CarteiraRepositoryInterface
     public function model(): Model;
     public function create(array $data): Model;
     public function find($id): ?Model;
+    public function findByCodigo($codigo): ?Model;
     public function all($filters, $order, $sort): Collection;
     public function paginated($filters, $order, $sort): LengthAwarePaginator;
     public function buscarCarteiraAtiva($user_id): ?Model;

@@ -40,6 +40,11 @@ class CarteiraRepository implements CarteiraRepositoryInterface
         return $this->model->find($id);
     }
 
+    public function findByCodigo($codigo): ?Model
+    {
+        return $this->model->where('codigo', $codigo)->first();
+    }
+
     public function all($filters, $order, $sort): Collection
     {
         return $this->model->index($filters, $order, $sort)->get();
