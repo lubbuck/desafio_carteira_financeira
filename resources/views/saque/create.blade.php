@@ -41,7 +41,6 @@
                 thousands: '.',
                 decimal: ','
             });
-            calculaPagamento();
         });
     </script>
 @stop
