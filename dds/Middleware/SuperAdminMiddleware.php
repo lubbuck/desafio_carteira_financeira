@@ -16,7 +16,6 @@ class SuperAdminMiddleware
             return $next($request);
         }
 
-        alert()->error('Acesso não Autorizado');
-        return redirect()->route('home');
+        abort(403);
     }
 }

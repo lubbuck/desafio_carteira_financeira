@@ -10,15 +10,18 @@
 @stop
 
 @section('content')
-    <div class="btn-list mb-3">
-        <button class="btn btn-sm {{ session('layout_theme') === 'light-style' ? 'btn-outline-primary' : 'btn-primary' }}"
-            type="button" onclick="document.getElementById('cadastrar-carteria').submit()">
-            Cadastrar Carteira
-        </button>
-        <form id="cadastrar-carteria" method="POST" action="{{ route('carteira.store') }}">
-            @csrf
-        </form>
-    </div>
+    @if (is_null($carteiraAtiva))
+        <div class="btn-list mb-3">
+            <button
+                class="btn btn-sm {{ session('layout_theme') === 'light-style' ? 'btn-outline-primary' : 'btn-primary' }}"
+                type="button" onclick="document.getElementById('cadastrar-carteria').submit()">
+                Cadastrar Carteira
+            </button>
+            <form id="cadastrar-carteria" method="POST" action="{{ route('carteira.store') }}">
+                @csrf
+            </form>
+        </div>
+    @endif
     <div class="card">
         <div class="card-body p-0">
             <div class="table-responsive">

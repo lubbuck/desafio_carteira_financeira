@@ -25,14 +25,17 @@ class CarteiraController extends Controller
 
     public function index(Request $request)
     {
-        $carteiras = auth()->user()->carteiras()->index($request->all(), 'created_at', 'desc')->qtdPag($request->qtd);
-        return view($this->bag['view'] . '.index', compact('carteiras'));
+        $carteiras = $this->carteiraService->userCarteiras(auth()->id(), $request->all(), 'created_at', 'desc');
+        $carteiraAtiva = $this->carteiraService->carteiraAtiva(auth()->id());
+        return view($this->bag['view'] . '.index', compact('carteiras', 'carteiraAtiva'));
     }
 
     public function store()
     {
-        if (!is_null($this->carteiraService->buscarCarteiraAtiva(auth()->user()))) {
-            return redirect()->back()->with(['error' => "Você já possui uma carteira ativa"]);
+        $carteira = $this->carteiraService->carteiraAtiva(auth()->id());
+
+        if (!is_null($carteira)) {
+            return redirect()->route($this->bag['route'] . '.show', ['carteira' => $carteira->getKey()])->with(['info' => "Você já possui uma carteira ativa"]);;
         }
 
         try {
@@ -42,12 +45,18 @@ class CarteiraController extends Controller
             return redirect()->route($this->bag['route'] . '.show', ['carteira' => $carteira->getKey()])->with(['success' => "Carteira cadastrada com sucesso"]);;
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back();
+            return redirect()->back()->with(['error' => $th->getMessage()]);
         }
     }
 
-    public function show(Carteira $carteira)
+    public function show($carteira)
     {
+        $carteira = $this->carteiraService->find($carteira);
+
+        if (is_null($carteira)) {
+            abort(403);
+        }
+
         if ($carteira->user_id != auth()->id()) {
             return redirect()->back()->with(['error' => "Você não possui acesso nesta carteira"]);
         }
@@ -57,24 +66,24 @@ class CarteiraController extends Controller
 
     public function desativar()
     {
-        $carteira = $this->carteiraService->buscarCarteiraAtiva(auth()->user());
+        $carteira = $this->carteiraService->carteiraAtiva(auth()->id());
 
         if (is_null($carteira)) {
             return redirect()->back()->with(['error' => "Você não possui uma carteira ativa"]);
         }
 
-        if ($this->carteiraService->verificaSaldo($carteira)) {
+        if ($carteira->possuiSaldo()) {
             return redirect()->back()->with(['error' => "Você ainda possui saldo na carteira. Saque ou transfira antes de desativar"]);
         }
 
         try {
             DB::beginTransaction();
-            $this->carteiraService->desativarCarteira($carteira);
+            $carteira->update(['ativada' => false]);
             DB::commit();
             return redirect()->route($this->bag['route'] . '.show', ['carteira' => $carteira->getKey()]);
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back();
+            return redirect()->back()->with(['error' => $th->getMessage()]);
         }
     }
 }

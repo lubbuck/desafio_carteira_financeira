@@ -42,6 +42,7 @@ class Carteira extends Model
     protected $searchable = [
         'codigo' => ['like', 'carteiras.codigo'],
         'saldo' => ['float', 'carteiras.saldo'],
+        'user_id' => ['uuid', 'carteiras.user_id'],
         'created' => ['date', 'carteiras.created_at'],
         'created_from' => ['begin', 'carteiras.created_at'],
         'created_to' => ['end', 'carteiras.created_at'],

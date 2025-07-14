@@ -16,6 +16,6 @@ class PermitedMiddleware
             return $next($request);
         }
 
-        return redirect()->route('home')->with(['error' => "Você não tem permissão para acessar esta rota"]);
+        abort(403);
     }
 }
