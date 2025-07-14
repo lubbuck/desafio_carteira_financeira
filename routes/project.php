@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     CarteiraController,
     DepositoController,
+    DepositoReversaoController,
     SaqueController,
 };
 
@@ -31,7 +32,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'deposito'], function () {
         Route::get('/create', [DepositoController::class, 'create'])->name('deposito.create');
         Route::post('/store', [DepositoController::class, 'store'])->name('deposito.store');
-        Route::put('/reverter/{deposito}', [DepositoController::class, 'reverter'])->name('deposito.reverter');
+
+        Route::group(['prefix' => 'reversao'], function () {
+            Route::put('/store/{deposito}', [DepositoReversaoController::class, 'store'])->name('deposito_reversao.store');
+        });
     });
 
     Route::group(['prefix' => 'saque'], function () {

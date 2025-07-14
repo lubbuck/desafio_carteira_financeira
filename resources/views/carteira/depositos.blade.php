@@ -2,10 +2,10 @@
 
 @section('content_header')
     @include('utils.layout.contentHeader', [
-        'title' => 'Depositos da Carteira',
+        'title' => 'Depóstios da Carteira',
         'items' => [
             'Carteiras' => ['carteira.index'],
-            'Depositos' => null,
+            'Depóstios' => null,
         ],
     ])
 @stop
@@ -37,7 +37,7 @@
                                 </td>
                                 <td style="width: 80px">
                                     @if (is_null($deposito->reversao))
-                                        @if ($carteira->ativa)
+                                        @if ($carteira->ativada)
                                             <button
                                                 class="btn btn-sm {{ session('layout_theme') === 'light-style' ? 'btn-outline-primary' : 'btn-primary' }}"
                                                 type="button"
@@ -45,7 +45,7 @@
                                                 Reverter
                                             </button>
                                             <form id="{{ 'reverter-deposito-' . $deposito->id }}" method="POST"
-                                                action="{{ route('deposito.reverter', ['deposito' => $deposito->id]) }}">
+                                                action="{{ route('deposito_reversao.store', ['deposito' => $deposito->id]) }}">
                                                 @csrf
                                                 @method('PUT')
                                             </form>
