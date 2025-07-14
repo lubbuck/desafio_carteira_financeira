@@ -65,11 +65,26 @@ class Carteira extends Model
 
     public function possuiSaldo()
     {
-        return !is_null($this->saldo);
+        return $this->saldo > 0;
+    }
+
+    public function possuiSaldoParaOperacao($valor)
+    {
+        return (int) $this->saldo >= (int) $valor;
     }
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function entradas()
+    {
+        return $this->hasMany(Entrada::class, 'carteira_id');
+    }
+
+    public function saidas()
+    {
+        return $this->hasMany(Saida::class, 'carteira_id');
     }
 }

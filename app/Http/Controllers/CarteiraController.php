@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Services\CarteiraService;
@@ -53,14 +52,16 @@ class CarteiraController extends Controller
         $carteira = $this->carteiraService->find($carteira);
 
         if (is_null($carteira)) {
-            abort(403);
+            abort(404);
         }
 
         if ($carteira->user_id != auth()->id()) {
             return redirect()->route($this->bag['route'] . '.index')->with(['info' => "Você não possui acesso nesta carteira"]);;
         }
 
-        return view($this->bag['view'] . '.show', compact('carteira'));
+        $entradas = $carteira->entradas()->orderBy('created_at', 'desc')->get();
+        $saidas = $carteira->saidas()->orderBy('created_at', 'desc')->get();
+        return view($this->bag['view'] . '.show', compact('carteira', 'entradas', 'saidas'));
     }
 
     public function desativar()

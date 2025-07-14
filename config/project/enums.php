@@ -91,4 +91,68 @@ return [
         'd' => 'D',
         'e' => 'E',
     ],
+
+    'tipos_operacao' => [
+        'saque' => 'Saque',
+        'deposito' => 'Depósito',
+        'deposito_reversao' => 'Reversão de Depósito',
+        'transferencia_reversao' => 'Reversão de Transferencia',
+    ],
+
+    'status_entradas' => [
+        'created' => 'Criado',
+        'pedding' => 'Pendente',
+        'processed' => 'Processado',
+        'success' => 'Sucesso',
+        'failed' => 'Falha',
+    ],
+
+    'status_saidas' => [
+        'created' => 'Criado',
+        'pedding' => 'Pendente',
+        'processed' => 'Processado',
+        'success' => 'Sucesso',
+        'failed' => 'Falha',
+    ],
+
+    'status_depositos' => [
+        'created' => 'Criado',
+        'pedding' => 'Pendente',
+        'processed' => 'Processado',
+        'success' => 'Sucesso',
+        'failed' => 'Falha',
+    ],
+
+    'status_depositos_reversao' => [
+        'created' => 'Criado',
+        'pedding' => 'Pendente',
+        'processed' => 'Processado',
+        'success' => 'Sucesso',
+        'failed' => 'Falha',
+    ],
+
+    'status_saques' => [
+        'created' => 'Criado',
+        'pedding' => 'Pendente',
+        'processed' => 'Processado',
+        'success' => 'Sucesso',
+        'failed' => 'Falha',
+    ],
+
+    'status_transferencias' => [
+        'created' => 'Criado',
+        'pedding' => 'Pendente',
+        'processed' => 'Processado',
+        'success' => 'Sucesso',
+        'failed' => 'Falha',
+    ],
+
+    'status_transferencias_reversao' => [
+        'created' => 'Criado',
+        'pedding' => 'Pendente',
+        'processed' => 'Processado',
+        'success' => 'Sucesso',
+        'failed' => 'Falha',
+    ],
+
 ];

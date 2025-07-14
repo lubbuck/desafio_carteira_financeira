@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('carteiras', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('codigo')->unique();
-            $table->integer('saldo')->nullable();
+            $table->integer('saldo')->default(0);
             $table->boolean('ativada')->default(true);
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users');

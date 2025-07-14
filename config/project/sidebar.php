@@ -14,6 +14,11 @@ return [
             "icon" => "bx bx-wallet",
             "route" => "carteira.index"
         ],
+        [
+            "name" =>  "Depositar",
+            "icon" => "bx bx-wallet",
+            "route" => "deposito.create"
+        ]
     ],
 
     'administracao' => [

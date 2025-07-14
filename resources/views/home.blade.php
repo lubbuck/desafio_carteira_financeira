@@ -8,12 +8,14 @@
 @stop
 
 @section('content')
-    @if ($carteira)
-        @include('carteira.card')
-    @else
-        @include('utils.layout.alert', [
-            'text' => 'Cadastre uma cartera na aba ao lado',
-            'color' => 'primary',
-        ])
-    @endif
+    @auth
+        @if ($carteira)
+            @include('carteira.card')
+        @else
+            @include('utils.layout.alert', [
+                'text' => 'Cadastre uma cartera na aba ao lado',
+                'color' => 'primary',
+            ])
+        @endif
+    @endauth
 @endsection
