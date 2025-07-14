@@ -22,7 +22,7 @@
                         <label class="form-label">Valor (R$)</label>
                         <input type="text" class="form-control preco @if ($errors->has('valor')) is-invalid @endif"
                             name="valor" id="valor" aria-label="Valor" value="{{ old('valor') }}" required>
-                        @include('utils.form.error', ['param' => 'cpf'])
+                        @include('utils.form.error', ['param' => 'valor'])
                     </div>
                 </div>
                 @include('utils.buttons.submit')

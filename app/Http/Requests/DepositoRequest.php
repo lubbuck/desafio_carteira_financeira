@@ -15,7 +15,7 @@ class DepositoRequest extends FormRequest
     public function rules()
     {
         return [
-            'valor' => ['required', 'numeric', 'digits_between:2,14'],
+            'valor' => ['required', 'numeric', 'digits_between:1,14'],
         ];
     }
 

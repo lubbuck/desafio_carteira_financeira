@@ -37,17 +37,19 @@
                                 </td>
                                 <td style="width: 80px">
                                     @if (is_null($deposito->reversao))
-                                        <button
-                                            class="btn btn-sm {{ session('layout_theme') === 'light-style' ? 'btn-outline-primary' : 'btn-primary' }}"
-                                            type="button"
-                                            onclick="document.getElementById('{{ 'reverter-deposito-' . $deposito->id }}').submit()">
-                                            Reverter
-                                        </button>
-                                        <form id="{{ 'reverter-deposito-' . $deposito->id }}" method="POST"
-                                            action="{{ route('deposito.reverter', ['deposito' => $deposito->id]) }}">
-                                            @csrf
-                                            @method('PUT')
-                                        </form>
+                                        @if ($carteira->ativa)
+                                            <button
+                                                class="btn btn-sm {{ session('layout_theme') === 'light-style' ? 'btn-outline-primary' : 'btn-primary' }}"
+                                                type="button"
+                                                onclick="document.getElementById('{{ 'reverter-deposito-' . $deposito->id }}').submit()">
+                                                Reverter
+                                            </button>
+                                            <form id="{{ 'reverter-deposito-' . $deposito->id }}" method="POST"
+                                                action="{{ route('deposito.reverter', ['deposito' => $deposito->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                            </form>
+                                        @endif
                                     @else
                                         <span class="badge bg-warning">Revertido</span>
                                     @endif
