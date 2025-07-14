@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html class="light-style layout-menu-fixed" data-theme="theme-default"
+<html class="{{ session('layout_theme') }} layout-menu-fixed" data-theme="theme-default"
     data-assets-path="{{ asset('/assets') . '/' }}" data-framework="laravel"
     data-template="vertical-menu-laravel-template-free" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -37,6 +37,11 @@
 
     @yield('page-style')
 
+    @if (session('layout_theme') == 'dark-style')
+        <link rel="stylesheet" href="{{ asset('assets/vendor/css/core-dark.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-dark.css') }}" />
+    @endif
+
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
@@ -54,7 +59,6 @@
 
 <body>
     @yield('body')
-
 
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
 

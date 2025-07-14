@@ -45,7 +45,7 @@ class BuildProject
         $super_admin_visualization = $user ? $user->isSuperAdmin() && session('super_admin_visualization', $user->isSuperAdmin()) : false;
 
         session([
-            'layout_theme' => session('layout_theme', 'light'),
+            'layout_theme' => session('layout_theme', 'light-style'),
             'super_admin_visualization' => $super_admin_visualization,
             'routes_user_can_access' => $routesUserCanAccess
         ]);

@@ -3,7 +3,9 @@
 */
 .apexcharts-canvas {
   position: relative;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   /* cannot give overflow: hidden as it will crop tooltips which overflow outside chart area */
 }
 
@@ -742,5 +744,5 @@
   filter: none;
 }
 .light-style .apexcharts-canvas .apexcharts-marker {
-  filter: drop-shadow(0 2px 4px #a1acb866);
+  filter: drop-shadow(0 2px 4px rgba(161, 172, 184, 0.4));
 }

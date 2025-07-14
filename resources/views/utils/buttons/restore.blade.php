@@ -5,8 +5,8 @@
 @endphp
 
 @permiteroute($route, $onlyIf ?? true)
-    <button class="btn btn-sm {{ session('layout_theme', 'light') === 'light' ? 'btn-outline-danger' : 'btn-danger' }}" type="button"
-        title="Restaurar este Registro" onclick="document.getElementById('{{ $id }}').submit()">
+    <button class="btn btn-sm {{ session('layout_theme') === 'light-style' ? 'btn-outline-danger' : 'btn-danger' }}"
+        type="button" title="Restaurar este Registro" onclick="document.getElementById('{{ $id }}').submit()">
         {{ $text ?? 'Restaurar' }}
     </button>
     <form id="{{ $id }}" method="POST" action="{{ route($route, $params) }}">

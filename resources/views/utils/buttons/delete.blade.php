@@ -6,9 +6,9 @@
 
 @if (Route::has($route))
     @permiteroute($route, $onlyIf ?? true)
-        <button class="btn btn-sm {{ session('layout_theme', 'light') === 'light' ? 'btn-outline-danger' : 'btn-danger' }}"
+        <button class="btn btn-sm {{ session('layout_theme') === 'light-style' ? 'btn-outline-danger' : 'btn-danger' }}"
             type="button" title="Apagar este Registro" onclick="document.getElementById('{{ $id }}').submit()">
-            <i class="fa fa-trash"></i>
+            <i class="bx bx-trash"></i>
             {{ $text ?? '' }}
         </button>
         <form id="{{ $id }}" method="POST" action="{{ route($route, $params) }}">
