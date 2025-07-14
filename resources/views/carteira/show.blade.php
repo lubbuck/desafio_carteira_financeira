@@ -11,7 +11,7 @@
 @stop
 
 @section('content')
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-header border-bottom-0">
             <div class="btn-list">
                 @if ($carteira->ativada)

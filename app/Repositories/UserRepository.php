@@ -21,6 +21,11 @@ class UserRepository implements UserRepositoryInterface
         $this->model = $model;
     }
 
+    public function model()
+    {
+        return $this->model;
+    }
+
     public function create($data): Model
     {
         $data['password'] = Hash::make($data['password'] ?? Str::random(8));

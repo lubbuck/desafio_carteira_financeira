@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <div class="card-header border-bottom-0 d-sm-flex justify-content-between align-items-center">
         <h5 class="card-title">
-            Carteira Ativa
+            Carteira {{ $carteira->ativada()}}
         </h5>
         @include('utils.buttons.show', [
             'route' => 'carteira',

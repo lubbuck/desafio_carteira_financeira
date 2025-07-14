@@ -20,6 +20,11 @@ class CarteiraRepository implements CarteiraRepositoryInterface
         $this->model = $model;
     }
 
+    public function model()
+    {
+        return $this->model;
+    }
+
     public function create($data): Model
     {
         $data['codigo'] = Str::random(50);

@@ -53,6 +53,11 @@ class Carteira extends Model
         return DDS::intToFloat2C($this->saldo);
     }
 
+    public function ativada()
+    {
+        return $this->ativada ? 'Ativada' : 'Desativada';
+    }
+
     public function situacao()
     {
         return $this->ativada ? $this->saldo() : 'Desativada';
