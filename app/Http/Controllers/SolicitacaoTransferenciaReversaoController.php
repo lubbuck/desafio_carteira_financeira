@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\SolicitacaoTransferenciaReversaoRequest;
-use App\Models\SolicitacaoTransferenciaReversao;
 use App\Services\SolicitacaoTransferenciaReversaoService;
 use App\Services\TransferenciaService;
 use App\Services\CarteiraService;
@@ -14,8 +13,8 @@ use App\Services\CarteiraService;
 class SolicitacaoTransferenciaReversaoController extends Controller
 {
     protected $bag = [
-        'view' => 'transferencia-reversao',
-        'route' => 'transferencia_reversao'
+        'view' => 'solicitacao-transferencia-reversao',
+        'route' => 'solicitacao_transferencia_reversao'
     ];
 
     protected $solicitacaoTransferenciaReversaoService;
