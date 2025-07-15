@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::group(['prefix' => 'solicitacao-reversao'], function () {
             Route::get('/create/{transferencia}', [SolicitacaoTransferenciaReversaoController::class, 'create'])->name('solicitacao_transferencia_reversao.create');
-            Route::post('/store/{transferencia}/store', [SolicitacaoTransferenciaReversaoController::class, 'store'])->name('solicitacao_transferencia_reversao.store');
+            Route::post('/store/{transferencia}', [SolicitacaoTransferenciaReversaoController::class, 'store'])->name('solicitacao_transferencia_reversao.store');
         });
     });
 });
