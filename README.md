@@ -31,62 +31,99 @@ Sistema de simulação de uma carteira financeira
 
 Como pré-requisito para a execução do projeto é necessário ter instalado na máquina o `docker` para a criação do ambiente. Para instalar e executar o projeto é necessário fazer o clone do mesmo e acessar o diretório do projeto baixado para executar, em sequência, as seguintes ações:
 
--   Crie um arquivo de nome `.env` e insira nele as informações do arquivo `.env.example`. Obs: também pode ser feito usando as linhas de comando `cp .env.example .env`
-    -   Após criar o arquivo `.env` edute as seguintes variáveis de ambiente
-        ```
-            DB_CONNECTION=pgsql
-            DB_HOST=postgres
-            DB_PORT=5432
-            DB_DATABASE=carteira_financeira_db
-            DB_USERNAME=carteira_financeira_user
-            DB_PASSWORD=carteira_financeira_password
-        ```
+-   Crie um arquivo de nome `.env` e insira nele as informações do arquivo `.env.example`. Obs: também pode ser feito usando as linhas de comando:
+    ```bash
+    cp .env.example .env
+    ```
+
+-   Após criar o arquivo `.env` edite as seguintes variáveis de ambiente
+    ```
+    DB_CONNECTION=pgsql
+    DB_HOST=postgres
+    DB_PORT=5432
+    DB_DATABASE=carteira_financeira_db
+    DB_USERNAME=carteira_financeira_user
+    DB_PASSWORD=carteira_financeira_password
+    ```
+
 -   Execute os próximos comandos em sequência
 
-    -   `docker-compose up -d` (cria os containers no docker)
-
-    -   `docker-compose run --rm composer install` (instala as dependências do backend via composer)
-
-    -   `docker-compose run --rm artisan key:generate` (gera a chave do sistema)
-
-    -   `docker-compose run --rm artisan storage:link` (cria o link de armazenamento de arquivos)
-
-    -   `docker-compose run --rm npm install` (instala as dependências do frontend via npm)
-
-    -   `docker-compose run --rm npm run build` (compila as dependências do frontend via npm)
-
-    -   `docker-compose run --rm artisan migrate --seed` (cria as tabelas no banco de dados com dados iniciais)
-
-    -   `docker exec -it carteira_financeira-app chown -R www-data:www-data /var/www/storage` (permite o acesso do docker às pastas)
-
+    -   Criar os containers no docker
+        ```bash
+        docker-compose up -d
+        ```
+    -   Instalar as dependências do backend via composer
+        ```bash
+        docker-compose run --rm composer install
+        ```
+    -   Gerar a chave do sistema
+        ```bash
+        docker-compose run --rm artisan key:generate
+        ```
+    -   Criar o link de armazenamento de arquivos
+        ```bash
+        docker-compose run --rm artisan storage:link
+        ```
+    -   Instalar as dependências do frontend via npm
+        ```bash
+        docker-compose run --rm npm install
+        ```
+    -   Compilar as dependências do frontend via npm
+        ```bash
+        docker-compose run --rm npm run build
+        ```
+    -   Criar as tabelas no banco de dados com dados iniciais
+        ```bash
+        docker-compose run --rm artisan migrate --seed
+        ```
+    -   Permitir o acesso do docker às pastas
+        ```bash
+        docker exec -it carteira_financeira-app chown -R www-data:www-data /var/www/storage
+        ```
     -   Após os comandos acesse o projeto em: [http://localhost/](http://localhost/)
 
 ## Instalação e execução do projeto sem docker
 
 Como pré-requisito para a execução do projeto é necessário ter instalado na máquina o `PHP` na versão `12 ou superior`, o `composer` na versão mais recente, o bando de dados `PostgresSQL` na versão `12 ou superior` e o `node` na versão `18 ou superior` para a criação do ambiente. Para instalar e executar o projeto é necessário fazer o clone do mesmo e acessar o diretório do projeto baixado para executar, em sequência, as seguintes ações:
 
--   Crie um arquivo de nome `.env` e insira nele as informações do arquivo `.env.example`.
-    -   Após criar o arquivo `.env` edute as seguintes variáveis de ambiente
-        ```
-            DB_CONNECTION=pgsql
-            DB_HOST=postgres
-            DB_PORT=5432
-            DB_DATABASE=carteira_financeira_db
-            DB_USERNAME=carteira_financeira_user
-            DB_PASSWORD=carteira_financeira_password
-        ```
+
+
+
+-   Crie um arquivo de nome `.env` e insira nele as informações do arquivo `.env.example`. Após criar o arquivo `.env` edite as seguintes variáveis de ambiente
+    ```
+    DB_CONNECTION=pgsql
+    DB_HOST=postgres
+    DB_PORT=5432
+    DB_DATABASE=carteira_financeira_db
+    DB_USERNAME=carteira_financeira_user
+    DB_PASSWORD=carteira_financeira_password
+    ```
+
 -   Execute os próximos comandos em sequência
 
-    -   `composer install` (instala as dependências do backend via composer)
 
-    -   `php artisan key:generate` (gera a chave do sistema)
-
-    -   `php artisan storage:link` (cria o link de armazenamento de arquivos)
-
-    -   `npm install` (instala as dependências do frontend via npm)
-
-    -   `npm run build` (compila as dependências do frontend via npm)
-
-    -   `php artisan migrate --seed` (cria as tabelas no banco de dados com dados iniciais)
-
+    -   Instalar as dependências do backend via composer
+        ```bash
+        composer install
+        ```
+    -   Gerar a chave do sistema
+        ```bash
+        php artisan key:generate
+        ```
+    -   Criar o link de armazenamento de arquivos
+        ```bash
+        php artisan storage:link
+        ```
+    -   Instalar as dependências do frontend via npm
+        ```bash
+        npm install
+        ```
+    -   Compilar as dependências do frontend via npm
+        ```bash
+        npm run build
+        ```
+    -   Criar as tabelas no banco de dados com dados iniciais
+        ```bash
+        artisan migrate --seed
+        ```
     -   Após os comandos acesse o projeto em: [http://localhost:8000/](http://localhost:8000/)
