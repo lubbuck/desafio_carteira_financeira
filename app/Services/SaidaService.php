@@ -29,7 +29,7 @@ class SaidaService
         }
 
         if (!$carteira->possuiSaldoParaRetirar($valor)) {
-            throw new \Exception("Saldo indisponível. Não é possivel realizar a operação.");
+            throw new \Exception("Saldo indisponível. Deposite um valor antes de realizar esta operação.");
         }
 
         $carteira->update([
