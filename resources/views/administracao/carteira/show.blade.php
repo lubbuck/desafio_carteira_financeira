@@ -1,4 +1,4 @@
-@extends('layout.page', ['sidebar' => 'app'])
+@extends('layout.page', ['sidebar' => 'administracao'])
 
 @section('content_header')
     @include('utils.layout.contentHeader', [
@@ -11,7 +11,7 @@
 @stop
 
 @section('content')
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-header border-bottom-0">
             <div class="btn-list">
                 @include('utils.buttons.model', [
@@ -36,5 +36,79 @@
             </div>
         </div>
         @include('utils.layout.footerInfo', ['model' => $carteira])
+    </div>
+    <div class="row mb-3">
+        <div class="col-lg-6">
+            <h4>Entradas</h4>
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-responsive-lg table-bordered table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="width: 170px">Cadastrado em</th>
+                                    <th style="width: 120px">Valor R$</th>
+                                    <th>Operação</th>
+                                    <th style="width: 100px">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($entradas as $entrada)
+                                    <tr>
+                                        <td style="width: 170px">{{ $entrada->createdAt() }} </td>
+                                        <td style="width: 120px">
+                                            {{ $entrada->valor() }}
+                                        </td>
+                                        <td>
+                                            {{ $entrada->tipoOperacao() }}
+                                        </td>
+                                        <td style="width: 100px">
+                                            {{ $entrada->status() }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @include('utils.layout.pagination', ['items' => $entradas])
+        </div>
+        <div class="col-lg-6">
+            <h4>Saídas</h4>
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-responsive-lg table-bordered table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="width: 170px">Cadastrado em</th>
+                                    <th style="width: 120px">Valor R$</th>
+                                    <th>Operação</th>
+                                    <th style="width: 100px">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($saidas as $saida)
+                                    <tr>
+                                        <td style="width: 170px">{{ $saida->createdAt() }} </td>
+                                        <td style="width: 120px">
+                                            {{ $saida->valor() }}
+                                        </td>
+                                        <td>
+                                            {{ $saida->tipoOperacao() }}
+                                        </td>
+                                        <td style="width: 100px">
+                                            {{ $saida->status() }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @include('utils.layout.pagination', ['items' => $saidas])
+        </div>
     </div>
 @stop

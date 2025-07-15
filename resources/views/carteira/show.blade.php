@@ -141,5 +141,4 @@
             @include('utils.layout.pagination', ['items' => $saidas])
         </div>
     </div>
-
 @stop

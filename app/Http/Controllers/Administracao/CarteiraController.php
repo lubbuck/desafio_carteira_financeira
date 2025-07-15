@@ -23,6 +23,8 @@ class CarteiraController extends Controller
 
     public function show(Carteira $carteira)
     {
-        return view($this->bag['view'] . '.show', compact('carteira'));
+        $entradas = $carteira->entradas()->orderBy('created_at', 'desc')->get();
+        $saidas = $carteira->saidas()->orderBy('created_at', 'desc')->get();
+        return view($this->bag['view'] . '.show', compact('carteira', 'entradas', 'saidas'));
     }
 }
