@@ -11,7 +11,10 @@ use App\Contracts\Repositories\{
     SaidaRepositoryInterface,
     DepositoRepositoryInterface,
     DepositoReversaoRepositoryInterface,
-    SaqueRepositoryInterface
+    SaqueRepositoryInterface,
+    TransferenciaRepositoryInterface,
+    TransferenciaReversaoRepositoryInterface,
+    SolicitacaoTransferenciaReversaoRepositoryInterface,
 };
 
 use App\Repositories\{
@@ -21,7 +24,10 @@ use App\Repositories\{
     SaidaRepository,
     DepositoRepository,
     DepositoReversaoRepository,
-    SaqueRepository
+    SaqueRepository,
+    TransferenciaRepository,
+    TransferenciaReversaoRepository,
+    SolicitacaoTransferenciaReversaoRepository,
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -35,6 +41,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(DepositoRepositoryInterface::class, DepositoRepository::class);
         $this->app->bind(DepositoReversaoRepositoryInterface::class, DepositoReversaoRepository::class);
         $this->app->bind(SaqueRepositoryInterface::class, SaqueRepository::class);
+        $this->app->bind(TransferenciaRepositoryInterface::class, TransferenciaRepository::class);
+        $this->app->bind(TransferenciaReversaoRepositoryInterface::class, TransferenciaReversaoRepository::class);
+        $this->app->bind(SolicitacaoTransferenciaReversaoRepositoryInterface::class, SolicitacaoTransferenciaReversaoRepository::class);
     }
 
     public function boot()
