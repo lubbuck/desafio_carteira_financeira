@@ -11,12 +11,12 @@ use App\Contracts\Repositories\{
 class DatabaseSeeder extends Seeder
 {
     protected $userRepository;
-    protected $catracaRepository;
+    protected $carteiraRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository, CarteiraRepositoryInterface $catracaRepository)
+    public function __construct(UserRepositoryInterface $userRepository, CarteiraRepositoryInterface $carteiraRepository)
     {
         $this->userRepository = $userRepository;
-        $this->catracaRepository = $catracaRepository;
+        $this->carteiraRepository = $carteiraRepository;
     }
 
     public function run(): void
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'primeiro@email.com',
             'password' => '123456789'
         ]);
-        $this->catracaRepository->create([
+        $this->carteiraRepository->create([
             'user_id' => $user->id
         ]);
 
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'segundo@email.com',
             'password' => '123456789'
         ]);
-        $this->catracaRepository->create([
+        $this->carteiraRepository->create([
             'user_id' => $user->id
         ]);
 
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'terceirop@email.com',
             'password' => '123456789'
         ]);
-        $this->catracaRepository->create([
+        $this->carteiraRepository->create([
             'user_id' => $user->id
         ]);
 
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
             'password' => '123456789',
             'is_super_admin' => true, // true se for nós da ctic false para todo o resto
         ]);
-        $this->catracaRepository->create([
+        $this->carteiraRepository->create([
             'user_id' => $user->id
         ]);
     }

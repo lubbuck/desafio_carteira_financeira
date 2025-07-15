@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-misc.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
 
     @yield('vendor-style')
 

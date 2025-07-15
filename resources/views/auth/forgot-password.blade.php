@@ -1,25 +1,35 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+@extends('layout.auth')
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@section('title', ' Senha -')
+
+@section('content')
+    <h2 class="mb-3"> Login </h2>
+
+    <p class="text-justify mb-3 ">Um email com o link para a recuperação da sua senha será enviado para seu email</p>
+
+    @if (session()->get('status'))
+        <div class="alert alert-success  text-center">
+            {{ session('status') }}<br>
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="form-group mb-3">
+            <label class="form-label" for="email">Email</label>
+            <div class="input-group">
+                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email"
+                    placeholder="Entre com email" autofocus autocomplete="email" value="{{ old('email') }}" required>
+                <div class="input-group-text">
+                    <span class="bx bx-envelope"></span>
+                </div>
+            </div>
+            @include('utils.form.error', ['param' => 'email'])
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+        <div class="d-grid mb-3">
+            @include('utils.buttons.submit', [
+                'class' => 'btn btn-primary',
+                'text' => 'Enviar para email',
+            ])
         </div>
     </form>
-</x-guest-layout>
+@endsection

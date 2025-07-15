@@ -13,7 +13,7 @@
             @include('carteira.card')
         @else
             @include('utils.layout.alert', [
-                'text' => 'Cadastre uma cartera na aba ao lado',
+                'text' => 'Cadastre uma carteira na aba ao lado',
                 'color' => 'primary',
             ])
         @endif
