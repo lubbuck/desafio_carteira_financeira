@@ -86,9 +86,6 @@ Como pré-requisito para a execução do projeto é necessário ter instalado na
 
 Como pré-requisito para a execução do projeto é necessário ter instalado na máquina o `PHP` na versão `12 ou superior`, o `composer` na versão mais recente, o bando de dados `PostgresSQL` na versão `12 ou superior` e o `node` na versão `18 ou superior` para a criação do ambiente. Para instalar e executar o projeto é necessário fazer o clone do mesmo e acessar o diretório do projeto baixado para executar, em sequência, as seguintes ações:
 
-
-
-
 -   Crie um arquivo de nome `.env` e insira nele as informações do arquivo `.env.example`. Após criar o arquivo `.env` edite as seguintes variáveis de ambiente
     ```
     DB_CONNECTION=pgsql
@@ -100,8 +97,6 @@ Como pré-requisito para a execução do projeto é necessário ter instalado na
     ```
 
 -   Execute os próximos comandos em sequência
-
-
     -   Instalar as dependências do backend via composer
         ```bash
         composer install
@@ -124,6 +119,6 @@ Como pré-requisito para a execução do projeto é necessário ter instalado na
         ```
     -   Criar as tabelas no banco de dados com dados iniciais
         ```bash
-        artisan migrate --seed
+        php artisan migrate --seed
         ```
     -   Após os comandos acesse o projeto em: [http://localhost:8000/](http://localhost:8000/)
