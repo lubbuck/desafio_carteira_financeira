@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transferencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Services\CarteiraService;
@@ -94,6 +95,25 @@ class CarteiraController extends Controller
 
         $saques = $carteira->saques()->orderBy('created_at', 'desc')->get();
         return view($this->bag['view'] . '.saques', compact('carteira', 'saques'));
+    }
+
+    public function transferencias($carteira)
+    {
+        $carteira = $this->carteiraService->find($carteira);
+
+        if (is_null($carteira)) {
+            abort(404);
+        }
+
+        if ($carteira->user_id != auth()->id()) {
+            return redirect()->route($this->bag['route'] . '.index')->with(['info' => "Você não possui acesso nesta carteira"]);;
+        }
+
+        $transferencias = Transferencia::with('origem', 'destino', 'reversao', 'solicitacaoReversao')
+            ->where('carteira_origem_id', $carteira->id)->orWhere->where('carteira_destino_id', $carteira->id)
+            ->orderBy('created_at', 'desc')->get();
+
+        return view($this->bag['view'] . '.transferencias', compact('carteira', 'transferencias'));
     }
 
     public function desativar()

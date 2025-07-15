@@ -23,6 +23,11 @@ return [
             "name" =>  "Sacar",
             "icon" => "bx bx-dollar",
             "route" => "saque.create"
+        ],
+        [
+            "name" =>  "Transferir",
+            "icon" => "bx bx-dollar",
+            "route" => "transferencia.create"
         ]
     ],
 

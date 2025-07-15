@@ -25,19 +25,19 @@ class SolicitacaoTransferenciaReversao extends Model
 
     protected $keyType = 'string';
 
-    protected $table = 'transferencias_reversao';
+    protected $table = 'solicitacoes_transferencias_reversao';
 
     protected $fillable = [
         'motivo',
-        'transferencia'
+        'transferencia_id'
     ];
 
     protected $searchable = [
-        'motivo' => ['like', 'transferencias_reversao.motivo'],
-        'transferencia' => ['uuid', 'transferencias_reversao.transferencia'],
-        'created' => ['date', 'transferencias_reversao.created_at'],
-        'created_from' => ['begin', 'transferencias_reversao.created_at'],
-        'created_to' => ['end', 'transferencias_reversao.created_at'],
+        'motivo' => ['like', 'solicitacoes_transferencias_reversao.motivo'],
+        'transferencia_id' => ['uuid', 'solicitacoes_transferencias_reversao.transferencia_id'],
+        'created' => ['date', 'solicitacoes_transferencias_reversao.created_at'],
+        'created_from' => ['begin', 'solicitacoes_transferencias_reversao.created_at'],
+        'created_to' => ['end', 'solicitacoes_transferencias_reversao.created_at'],
     ];
 
     public function transferencia()
