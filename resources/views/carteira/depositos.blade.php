@@ -4,7 +4,7 @@
     @include('utils.layout.contentHeader', [
         'title' => 'Depóstios da Carteira',
         'items' => [
-            'Carteiras' => ['carteira.index'],
+            'Carteira' => ['carteira.show', ['carteira' => $carteira->id]],
             'Depóstios' => null,
         ],
     ])

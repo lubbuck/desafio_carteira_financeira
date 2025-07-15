@@ -96,6 +96,7 @@ return [
         'saque' => 'Saque',
         'deposito' => 'Depósito',
         'deposito_reversao' => 'Reversão de Depósito',
+        'transferencia' => 'Transferência',
         'transferencia_reversao' => 'Reversão de Transferencia',
     ],
 
