@@ -15,7 +15,7 @@ Sistema de simulação de uma carteira financeira
     -   Verificação de saldo ao tranfererir valores
 -   Visualização das carteiras com informações das operações
 
-[Documento explicativo sobre o sistema](https://docs.google.com/document/d/1B_j0qzazW0F3CCtLbm4SM1B8Ph-UFHkb/edit?usp=sharing&ouid=116466061483400451914&rtpof=true&sd=true)
+[Documento explicativo sobre o sistema](https://drive.google.com/file/d/1Leu9tAIKizo8rwkOaOXqAN3aGrORg_Xu/view?usp=sharing)
 
 ## Tecnologias Utilizadas:
 
